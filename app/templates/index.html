@@ -16,6 +16,7 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="viewport" content="width=device-width, user-scalable=no" />
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 
 	<style type="text/css">
 		body {
@@ -40,8 +41,8 @@
 		}
 
 		.small-box {
-			width: 100px;
-			height: 100px;
+			width: 200px;
+			height: 200px;
 			background: #7ce6df;
 			display: flex;
 			align-items: center;
@@ -84,7 +85,47 @@
 		</div>
 	</div>
 	<script>
-	  // your solution here
+	  var rotate = document.getElementById('rotate-box');
+    var mc = new Hammer.Manager(rotate);
+    mc.add(new Hammer.Rotate());
+    mc.on("rotate", function(ev) {
+      rotate.textContent = ev.type +" gesture detected.";
+      rotate.style.backgroundColor = "red";
+    });
+   
+    var pinch = document.getElementById('pinch-box');
+    var pimc = new Hammer.Manager(pinch);
+    pimc.add(new Hammer.Pinch());
+    pimc.on("pinch", function(ev) {
+      pinch.textContent = ev.type +" gesture detected.";
+      pinch.style.backgroundColor = "red";
+    });
+    var press = document.getElementById('press-box');
+    var prmc = new Hammer(press);
+    prmc.on("press", function(ev) {
+      press.textContent = ev.type +" gesture detected.";
+      press.style.backgroundColor = "red";
+    });
+    var pan = document.getElementById('pan-box');
+    var pmc = new Hammer(pan);
+    pmc.on("panleft panright", function(ev) {
+      pan.textContent = ev.type +" gesture detected.";
+      pan.style.backgroundColor = "red";
+    });
+    var tap = document.getElementById('tap-box');
+    var tmc = new Hammer(tap);
+    tmc.on("tap", function(ev) {
+      tap.textContent = ev.type +" gesture detected.";
+      tap.style.backgroundColor = "red";
+    });
+    var swipe = document.getElementById('swipe-box');
+    var smc = new Hammer(swipe);
+    smc.on("swipeleft swiperight", function(ev) {
+      swipe.textContent = ev.type +" gesture detected.";
+      swipe.style.backgroundColor = "red";
+    });
+    mc.get('pinch').set({ enable: true });
+    pimc.get('rotate').set({ enable: true });
   </script>
 </body>
 </html>
